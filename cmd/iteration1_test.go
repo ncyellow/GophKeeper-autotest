@@ -5,7 +5,6 @@ import (
 	"GophKeeper-autotests/internal/fork"
 	"context"
 	"errors"
-	"fmt"
 	"os"
 	"syscall"
 	"time"
@@ -38,20 +37,8 @@ func (suite *Iteration1Suite) SetupSuite() {
 		"DATABASE_DSN=" + flagDatabaseDSN,
 	}...)
 
-	suite.clientArgs = []string{
-		//"-a=localhost:" + flagServerPort,
-		//"-r=2s",
-		//"-p=1s",
-		//"-k=" + flagSHA256Key,
-	}
-	suite.serverArgs = []string{
-		//"-a=localhost:" + flagServerPort,
-		//// "-s=5s",
-		//"-r=false",
-		//"-i=5m",
-		//"-f=" + flagFileStoragePath,
-		//"-k=" + flagSHA256Key,
-	}
+	suite.clientArgs = []string{}
+	suite.serverArgs = []string{}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
@@ -158,12 +145,4 @@ func (suite *Iteration1Suite) clientShutdown() {
 }
 
 func (suite *Iteration1Suite) TestCardAPI() {
-	suite.clientProcess.Stdin("register\n")
-	fmt.Println("ok")
-	//fmt.Println(suite.clientProcess.Stdout(context.Background()))
-	suite.clientProcess.Stdin("Lenin\n")
-	//fmt.Println(suite.clientProcess.Stdout(context.Background()))
-	suite.clientProcess.Stdin("Lenin\n")
-	//fmt.Println(suite.clientProcess.Stdout(context.Background()))
-	fmt.Println("ok")
 }
